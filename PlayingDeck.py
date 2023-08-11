@@ -50,14 +50,18 @@ def value_to_rank(value: int) -> str:
 
 # %% CLASS
 class PlayingDeck:
-    def __init__(self, aces_high=False):
+    def __init__(self, aces_high=False, simple_face=False):
         """
         Initialize a deck of playing cards
 
         Parameters
         ----------
-        aces_high : TYPE, optional
-            DESCRIPTION. The default is False.
+        aces_high : bool, optional
+            Specify whether or no the value of an ace should be 1 or 14. Often
+            used in games like Texas Hold'em. The default is False.
+        simple_face : bool, optional
+            Will set all face cards to be a value of 10. Often seen in games
+            like Blackjack and Cribbage.
 
         Returns
         -------
@@ -76,7 +80,8 @@ class PlayingDeck:
                 PlayingCard(
                     value_to_rank(num % 13 + 1),
                     suits[counter],
-                    aces_high=aces_high
+                    aces_high=aces_high,
+                    simple_face=simple_face
                 )
             )
 

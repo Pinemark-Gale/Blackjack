@@ -14,7 +14,7 @@ Description:
 
 
 # %% FUNCTIONS
-def translate_rank(rank: str, aces_high=False) -> int:
+def translate_rank(rank: str, aces_high=False, simple_face=False) -> int:
     """
     Takes the rank of a card (number or letter) and translates that rank into
     a value.
@@ -37,12 +37,20 @@ def translate_rank(rank: str, aces_high=False) -> int:
     if rank.isdigit():
         translated = int(rank)
     else:
-        value_map = {
-            'A': 1,
-            'J': 11,
-            'Q': 12,
-            'K': 13,
-        }
+        if simple_face:
+            value_map = {
+                'A': 1,
+                'J': 10,
+                'Q': 10,
+                'K': 10,
+            }
+        else:
+            value_map = {
+                'A': 1,
+                'J': 11,
+                'Q': 12,
+                'K': 13,
+            }
 
         translated = value_map[rank[:1]]
 
@@ -81,7 +89,8 @@ def translate_suit(suit: str) -> str:
 
 # %% CLASS
 class PlayingCard:
-    def __init__(self, rank: str, suit: str, aces_high=False):
+    def __init__(self, rank: str, suit: str, aces_high=False,
+                 simple_face=False):
         """
         Initialize the playing card with a rank and suite specified.
 
@@ -93,8 +102,11 @@ class PlayingCard:
             The name of the suit. Can use the first letter of the suit or
             use the full name of the suit (only checking for first letter).
         aces_high : bool, optional
-            Specify whether or no the value of an ace should be 1 or 14.
-            The default is False.
+            Specify whether or no the value of an ace should be 1 or 14. Often
+            used in games like Texas Hold'em. The default is False.
+        simple_face : bool, optional
+            Will set all face cards to be a value of 10. Often seen in games
+            like Blackjack and Cribbage.
 
         Returns
         -------
@@ -103,7 +115,7 @@ class PlayingCard:
         """
         self.suit = translate_suit(suit)
         self.rank = rank[:2]
-        self.value = translate_rank(rank, aces_high)
+        self.value = translate_rank(rank, aces_high, simple_face)
 
     def __str__(self):
         """
@@ -140,6 +152,10 @@ def main():
     print(card)
 
     card = PlayingCard('J', 'diamonds')
+    print(f'Value: {card.value}')
+    print(card)
+
+    card = PlayingCard('J', 'diamonds', simple_face=True)
     print(f'Value: {card.value}')
     print(card)
 

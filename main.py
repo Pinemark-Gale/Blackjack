@@ -17,13 +17,10 @@ from PlayingDeck import PlayingDeck as Deck
 def my_func() -> None:
     return None
 
+
 # %% MAIN
-
-
 def main():
-    deck = Deck()
-
-    print(deck)
+    deck = Deck(simple_face=True)
 
 
 if __name__ == '__main__':
