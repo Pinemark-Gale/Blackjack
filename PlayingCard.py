@@ -143,6 +143,12 @@ class PlayingCard:
     def __eq__(self, other):
         return self.value == other.value
 
+    def __add__(self, other):
+        if type(other) == PlayingCard:
+            return self.value + other.value
+        elif type(other) == int:
+            return self.value + other
+
 
 # %% MAIN
 def main():

@@ -9,7 +9,8 @@ Description:
 """
 
 # %% IMPORT DEPENDENCIES AND SETTINGS
-from PlayingDeck import PlayingDeck as Deck
+from PlayingDeck import PlayingDeck
+from PlayingCard import PlayingCard
 
 # %% FUNCTIONS
 
@@ -20,7 +21,8 @@ def my_func() -> None:
 
 # %% MAIN
 def main():
-    deck = Deck(simple_face=True)
+    deck = PlayingDeck(simple_face=True)
+    blank = PlayingCard("0", " ")
 
 
 if __name__ == '__main__':
