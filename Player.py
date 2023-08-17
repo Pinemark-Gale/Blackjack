@@ -5,7 +5,7 @@ Created on 2023-08-11
 @author: Zoey Striker
 
 Description:
-    Defines the player class for Blackjack.
+    Provides the player object.
 """
 
 # %% IMPORT DEPENDENCIES AND SETTINGS

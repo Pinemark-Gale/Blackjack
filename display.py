@@ -5,7 +5,7 @@ Created on 2023-08-11
 @author: Zoey Striker
 
 Description:
-    What this program does!
+    Basic graphics for the main file to display.
 """
 
 # % IMPORT DEPENDENCIES AND SETTINGS AND GLOBAL VARIABLES
@@ -97,7 +97,7 @@ def player_turn(options: dict, player: Player, dealer: Player):
         print(f"{option}: {info['text']}")
 
 
-# % MAIN
+# %% MAIN
 def main():
     pass
 

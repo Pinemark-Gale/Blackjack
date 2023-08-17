@@ -5,7 +5,8 @@ Created on 2023-08-11
 @author: Zoey Striker
 
 Description:
-    What this program does!
+    Blackjack simulation only following the basic rules of the card game.
+    Should be a good representation of basic coding skills and style.
 """
 
 # %% IMPORT DEPENDENCIES AND SETTINGS
@@ -28,14 +29,39 @@ deck.shuffle()
 
 # %% FUNCTIONS
 def draw_player():
+    """
+    Draws a card from the deck for the user's player.
+
+    Returns
+    -------
+    None.
+
+    """
     player.pickup(deck.draw())
 
 
 def draw_dealer():
+    """
+    Draws a card from the deck for the dealer's player.
+
+    Returns
+    -------
+    None.
+
+    """
     dealer.pickup(deck.draw())
 
 
 def end_game():
+    """
+    Goes through end game processes ensuring next game will run as expected
+    (as well as giving rewards).
+
+    Returns
+    -------
+    None.
+
+    """
     # Play dealer's turn.
     while gl.is_under(dealer, max_score=17) and gl.is_under(player, max_score=21):
         draw_dealer()
@@ -56,13 +82,29 @@ def end_game():
     reset_game()
 
 
-def exit_game() -> None:
+def exit_game():
+    """
+    Prints simple message that game is shutting down.
+
+    Returns
+    -------
+    None.
+
+    """
     print('Exiting game...')
 
     return None
 
 
-def load_save() -> None:
+def load_save():
+    """
+    Loads the save of the prior game.
+
+    Returns
+    -------
+    None.
+
+    """
     stats = None
 
     with open('player.txt') as f:
@@ -73,7 +115,14 @@ def load_save() -> None:
 
 
 def reset_game():
-    global deck
+    """
+    Resets global variables so the next game can be played.
+
+    Returns
+    -------
+    None.
+
+    """
     global bet
     bet = 0
     player.reset_hand()
@@ -83,10 +132,26 @@ def reset_game():
 
 
 def set_player_name():
+    """
+    Sets player name of global user player variable.
+
+    Returns
+    -------
+    None.
+
+    """
     player.name = input('Please enter player name: ')
 
 
-def start_game() -> None:
+def start_game():
+    """
+    Starts main game logic.
+
+    Returns
+    -------
+    None.
+
+    """
     global bet
 
     while bet <= 0 or bet > player.chips:
@@ -115,7 +180,17 @@ def start_game() -> None:
     end_game()
 
 
-def menu() -> None:
+def menu() -> int:
+    """
+    Generates in game main menu and provides basic logic if user runs out of
+    chips.
+
+    Returns
+    -------
+    int
+        Last choice of user (must be 4).
+
+    """
     choice = 0
 
     menu_items = {
@@ -144,7 +219,6 @@ def menu() -> None:
 
 # %% MAIN
 def main():
-
     while menu() != 4:
         pass
 

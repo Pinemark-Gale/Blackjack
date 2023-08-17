@@ -5,18 +5,33 @@ Created on 2023-08-17
 @author: Zoey Striker
 
 Description:
-    What this program does!
+    Handles the in game logic, helper functions for the main file.
 """
 
 # % IMPORT DEPENDENCIES AND SETTINGS
 from PlayingDeck import PlayingDeck
-from PlayingCard import PlayingCard
 from Player import Player
 import random
 
 
 # % FUNCTIONS
-def get_number(prompt: str, default: int):
+def get_number(prompt: str, default: int) -> int:
+    """
+    Verifies input is a digit and will continuously ask if not given a digit.
+
+    Parameters
+    ----------
+    prompt : str
+        Prompt for the user to answer.
+    default : int
+        Vaule to use if the user gives an empty value.
+
+    Returns
+    -------
+    answer : int
+        Integer value fo the given user input.
+
+    """
     answer = 'Input never received?'
     while not answer.isdigit() and answer != '':
         answer = input(prompt)
@@ -185,7 +200,7 @@ def payout(outcome: str, bet: int, player_1: Player, player_2: Player) -> int:
     return outcomes[outcome]
 
 
-# % MAIN
+# %% MAIN
 def main():
     # Declaring variables.
     player = Player(name='Player')
