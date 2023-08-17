@@ -63,6 +63,10 @@ class Player:
 
         self.total = total
 
+    def reset_hand(self):
+        self.hand = []
+        self.total = [0, 0]
+
     def __str__(self):
         """
         Outputs the player's name, total points, and visuals for all cards

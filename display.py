@@ -22,6 +22,15 @@ LOGO = """
 
 
 # % FUNCTIONS
+def announce_winner(outcome: str):
+    if outcome == 'draw':
+        print('It\'s a draw!')
+    elif outcome == 'blackjack':
+        print('You got Blackjack!')
+    else:
+        print(f'{outcome} is the winner!')
+
+
 def main_menu(options: dict):
     print(LOGO)
 

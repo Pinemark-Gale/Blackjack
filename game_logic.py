@@ -74,10 +74,10 @@ def outcome(player_1: Player, player_2: Player) -> str:
 
 def payout(outcome: str, bet: int, player_1: Player, player_2: Player) -> int:
     outcomes = {
-        player_1.name: bet * 2,
-        player_2.name: 0,
-        'draw': bet,
-        'blackjack': (bet * 2) + (bet * 1.5)
+        player_1.name: bet,
+        player_2.name: -bet,
+        'draw': 0,
+        'blackjack': (bet * 1.5)
     }
 
     return outcomes[outcome]

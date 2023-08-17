@@ -21,7 +21,9 @@ player_name = 'Player'
 blank = PlayingCard("0", " ")
 dealer = Player('Dealer')
 player = Player('Player')
+bet = 100
 deck = PlayingDeck(simple_face=True)
+deck.shuffle()
 
 
 # %% FUNCTIONS
@@ -34,11 +36,16 @@ def draw_dealer():
 
 
 def end_game():
-    print('Results:', gl.outcome(player, dealer))
+    while gl.is_under(dealer, max_score=17):
+        draw_dealer()
 
+    display.player_turn({}, player, dealer)
+    display.announce_winner(gl.outcome(player, dealer))
     player.chips = player.chips + \
-        gl.payout(gl.outcome(player, dealer), 100, player, dealer)
+        gl.payout(gl.outcome(player, dealer), bet, player, dealer)
     print('Player Chips:', player.chips)
+
+    reset_game()
 
 
 def exit_game() -> None:
@@ -51,11 +58,24 @@ def load_save() -> None:
     pass
 
 
+def reset_game():
+    player.reset_hand()
+    dealer.reset_hand()
+    deck = PlayingDeck(simple_face=True)
+    deck.shuffle()
+
+
 def set_player_name():
     player.name(input('Please enter player name: '))
 
 
 def start_game() -> None:
+    global bet
+    bet = 100
+    bet = int(
+        input('How many chips would you like to bet? (Press Enter to bet 100.) ')
+    )
+
     player.pickup(deck.draw())
     dealer.pickup(deck.draw())
     player.pickup(deck.draw())
@@ -63,7 +83,7 @@ def start_game() -> None:
     choice = 0
     menu_items = {
         1: {'text': 'Hit', 'item': draw_player},
-        2: {'text': 'Stand', 'item': end_game},
+        2: {'text': 'Stand', 'item': print},
         3: {'text': 'Quit', 'item': menu}
     }
 
@@ -72,6 +92,8 @@ def start_game() -> None:
         choice = int(input('\nEnter number: '))
 
         menu_items[choice]['item']()
+
+    end_game()
 
 
 def menu() -> None:
@@ -93,9 +115,8 @@ def menu() -> None:
 
     return choice
 
+
 # %% MAIN
-
-
 def main():
 
     while menu() != 4:
