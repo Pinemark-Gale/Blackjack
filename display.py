@@ -23,6 +23,20 @@ LOGO = """
 
 # % FUNCTIONS
 def announce_winner(outcome: str):
+    """
+    Announces winner in plain text.
+
+    Parameters
+    ----------
+    outcome : str
+        Plain text of which player one or other descriptors for the outcome
+        of a game of blackjack.
+
+    Returns
+    -------
+    Prints to screen.
+
+    """
     if outcome == 'draw':
         print('It\'s a draw!')
     elif outcome == 'blackjack':
@@ -32,6 +46,19 @@ def announce_winner(outcome: str):
 
 
 def main_menu(options: dict):
+    """
+    Prints the main menu of the Blackjack game.
+
+    Parameters
+    ----------
+    options : dict
+        Each option with it's associated text key and item function.
+
+    Returns
+    -------
+    Prints to screen.
+
+    """
     print(LOGO)
 
     for option, info in options.items():
@@ -39,6 +66,23 @@ def main_menu(options: dict):
 
 
 def player_turn(options: dict, player: Player, dealer: Player):
+    """
+
+
+    Parameters
+    ----------
+    options : dict
+        Each option with it's associated text key and item function.
+    player : Player
+        Player object representing the user.
+    dealer : Player
+        Player object representing the dealer.
+
+    Returns
+    -------
+    Prints to screen.
+
+    """
     print(dealer)
     print('-' * 20)
     print(player)
