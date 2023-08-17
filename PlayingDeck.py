@@ -131,6 +131,7 @@ class PlayingDeck:
 
 # %% MAIN
 def main():
+    # Basic testing of class functions.
     print('Initializing deck...')
     deck = PlayingDeck()
     print(deck)

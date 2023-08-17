@@ -100,11 +100,13 @@ class Player:
 
 # %% MAIN
 def main():
+    # Declare variables.
     deck = PlayingDeck(simple_face=True)
     deck.shuffle()
 
     player = Player('Player')
 
+    # Basic testing.
     player.pickup(deck.draw())
     player.pickup(deck.draw())
     print(player)

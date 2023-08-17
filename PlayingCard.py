@@ -152,7 +152,7 @@ class PlayingCard:
 
 # %% MAIN
 def main():
-    # Example code on how to use this class.
+    # Basic testing of class functions.
     card = PlayingCard('2', 'd')
     print(f'Value: {card.value}')
     print(card)
