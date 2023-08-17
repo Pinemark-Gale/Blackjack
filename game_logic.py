@@ -16,6 +16,21 @@ import random
 
 
 # % FUNCTIONS
+def get_number(prompt: str, default: int):
+    answer = 'Input never received?'
+    while not answer.isdigit() and answer != '':
+        answer = input(prompt)
+
+    if answer.isdigit():
+        answer = int(answer)
+    elif answer == '':
+        answer = default
+    else:
+        answer = 0
+
+    return answer
+
+
 def is_blackjack(player: Player) -> bool:
     """
     Tests whether or not a given hand is a Blackjack hand.

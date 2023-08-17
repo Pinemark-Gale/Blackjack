@@ -14,14 +14,14 @@ from PlayingCard import PlayingCard
 from Player import Player
 
 import display
-import os
+import time
 import game_logic as gl
 
 player_name = 'Player'
 blank = PlayingCard("0", " ")
 dealer = Player('Dealer')
 player = Player('Player')
-bet = 100
+bet = 0
 deck = PlayingDeck(simple_face=True)
 deck.shuffle()
 
@@ -36,15 +36,23 @@ def draw_dealer():
 
 
 def end_game():
-    while gl.is_under(dealer, max_score=17):
+    # Play dealer's turn.
+    while gl.is_under(dealer, max_score=17) and gl.is_under(player, max_score=21):
         draw_dealer()
 
+    # Announce winner.
+    time.sleep(1)
     display.player_turn({}, player, dealer)
+    time.sleep(3)
     display.announce_winner(gl.outcome(player, dealer))
+
+    # Calculate payout.
     player.chips = player.chips + \
         gl.payout(gl.outcome(player, dealer), bet, player, dealer)
     print('Player Chips:', player.chips)
+    time.sleep(4)
 
+    player.export()
     reset_game()
 
 
@@ -55,10 +63,19 @@ def exit_game() -> None:
 
 
 def load_save() -> None:
-    pass
+    stats = None
+
+    with open('player.txt') as f:
+        stats = f.read().split(',')
+
+    player.name = str(stats[0])
+    player.chips = int(stats[1])
 
 
 def reset_game():
+    global deck
+    global bet
+    bet = 0
     player.reset_hand()
     dealer.reset_hand()
     deck = PlayingDeck(simple_face=True)
@@ -66,15 +83,17 @@ def reset_game():
 
 
 def set_player_name():
-    player.name(input('Please enter player name: '))
+    player.name = input('Please enter player name: ')
 
 
 def start_game() -> None:
     global bet
-    bet = 100
-    bet = int(
-        input('How many chips would you like to bet? (Press Enter to bet 100.) ')
-    )
+
+    while bet <= 0 or bet > player.chips:
+        bet = gl.get_number(
+            'How many chips would you like to bet? (Press Enter to bet 20.) ',
+            default=20,
+        )
 
     player.pickup(deck.draw())
     dealer.pickup(deck.draw())
@@ -89,7 +108,7 @@ def start_game() -> None:
 
     while gl.is_under(player) and choice != 2:
         display.player_turn(menu_items, player, dealer)
-        choice = int(input('\nEnter number: '))
+        choice = gl.get_number('\nEnter number: ', 0)
 
         menu_items[choice]['item']()
 
@@ -106,12 +125,19 @@ def menu() -> None:
         4: {'text': 'Quit', 'item': exit_game}
     }
 
-    display.main_menu(menu_items)
+    display.main_menu(menu_items, player)
 
     while choice not in menu_items.keys():
-        choice = int(input('\nEnter number: '))
+        choice = gl.get_number(
+            prompt='\nEnter number: ',
+            default=1,
+        )
 
     menu_items[choice]['item']()
+
+    if player.chips <= 0:
+        print('Oh no! You ran out of chips. Game over!')
+        choice = 4
 
     return choice
 

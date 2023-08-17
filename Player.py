@@ -64,8 +64,28 @@ class Player:
         self.total = total
 
     def reset_hand(self):
+        """
+        Resets variables associated with the hand of a player.
+
+        Returns
+        -------
+        None.
+
+        """
         self.hand = []
         self.total = [0, 0]
+
+    def export(self):
+        """
+        Exports variables into a text file.
+
+        Returns
+        -------
+        None.
+
+        """
+        with open('player.txt', 'w') as f:
+            f.write(f'{self.name}, {self.chips}')
 
     def __str__(self):
         """

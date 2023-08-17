@@ -45,7 +45,7 @@ def announce_winner(outcome: str):
         print(f'{outcome} is the winner!')
 
 
-def main_menu(options: dict):
+def main_menu(options: dict, player: Player):
     """
     Prints the main menu of the Blackjack game.
 
@@ -53,6 +53,8 @@ def main_menu(options: dict):
     ----------
     options : dict
         Each option with it's associated text key and item function.
+    player : player
+        User's information as a player object.
 
     Returns
     -------
@@ -60,6 +62,10 @@ def main_menu(options: dict):
 
     """
     print(LOGO)
+
+    print(f"{'Welcome ' + player.name + '!':^72}")
+    print(f"{'Current Chips: ' + str(player.chips):^72}")
+    print('\n' + '-' * 72 + '\n')
 
     for option, info in options.items():
         print(f"{option}: {info['text']}")
