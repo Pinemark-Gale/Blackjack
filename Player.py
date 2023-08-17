@@ -15,14 +15,14 @@ from PlayingDeck import PlayingDeck
 
 # %% CLASS
 class Player:
-    def __init__(self, name: str):
+    def __init__(self, name: str, chips=100):
         """
         Initialize the player, requiring that a name is given.
 
         Parameters
         ----------
         name : str
-            Name of the player..
+            Name of the player.
 
         Returns
         -------
@@ -31,7 +31,8 @@ class Player:
         """
         self.name = name
         self.hand = []
-        self.total = []
+        self.total = [0, 0]
+        self.chips = chips
 
     def pickup(self, card: PlayingCard):
         """
